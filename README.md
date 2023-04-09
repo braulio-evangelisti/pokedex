@@ -9,19 +9,41 @@
 ```
 $ yarn install
 ```
+
 3. Intall NestJs CLI
 ```
 $ npm i -g @nestjs/cli
 ```
+
 4. Run DB
 ```
 $ docker-compose up -d
 ```
-5. Run DB seed
+
+5. Make a copy of ```.env.template``` as ```.env``` and complete it with local values
+
+6. Run DB seed (optional)
 ```
 POST http://localhost:3000/api/v2/seed
 ```
 
+7. Start dev application
+```
+$ yarn start:dev
+```
+
 ## Stack
-* NestJS
-* MongoDB
+* NestJS - v9
+* MongoDB - v6
+
+# Local Run in Docker
+
+```
+$ docker-compose up -d --build pokedex
+```
+
+# Production Build
+
+```
+$ docker-compose up -d --build pokedex-prod
+```

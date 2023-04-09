@@ -1,8 +1,36 @@
 version: '3'
 
 services:
+  pokedex:
+    image: node:18-alpine3.15
+    command: yarn start:dev
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    working_dir: /app
+    env_file: ./.env
+    depends_on:
+      - db
+
+  pokedex-prod:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: pokedex-docker
+    container_name: pokedex-prod
+    restart: always
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      MONGO_URL: ${MONGO_URL}
+      PORT: ${PORT}
+    depends_on:
+      - db
+
   db: 
     image: mongo:6
+    container_name: mongo-poke
     restart: always
     ports:
       - 27017:27017
